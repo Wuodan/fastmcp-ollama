@@ -3,8 +3,8 @@
 import logging
 from typing import AsyncGenerator, List, Optional
 
-from ...config import config
-from ...utils import get_ollama_client, retry_async, sanitize_input, validate_model_name
+from ..config import config
+from ..utils import get_ollama_client, retry_async, sanitize_input, validate_model_name
 
 logger = logging.getLogger(__name__)
 

@@ -28,7 +28,6 @@ logger = logging.getLogger(__name__)
 # Initialize FastMCP server
 mcp = FastMCP(
     name=config.server.name,
-    description=config.server.description,
     dependencies=["ollama", "pydantic"]
 )
 

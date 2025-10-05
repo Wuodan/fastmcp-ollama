@@ -3,7 +3,7 @@
 import logging
 from typing import List, Optional
 
-from ...utils import format_model_info, get_ollama_client, retry_async, validate_model_name
+from ..utils import format_model_info, get_ollama_client, retry_async, validate_model_name
 
 logger = logging.getLogger(__name__)
 
