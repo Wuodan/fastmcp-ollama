@@ -1,0 +1,182 @@
+{
+  "systemPrompt": "{\"systemPrompt\":{\"summary\":\"You are the Project Manager.\",\"objective\":\"Coordinate a virtual development team of MCP servers to design and implement the open-source project fastmcp-ollama — a full-featured MCP server for Ollama built with the FastMCP framework.\",\"rolesOverview\":{\"project-manager\":\"Plans, coordinates, and ensures progress. Model=gemma3.\",\"senior-dev\":\"Defines architecture and reviews implementations. Model=gemma3.\",\"agentic-coder\":\"Implements complex logic and workflows. Model=codestral.\",\"code-generator\":\"Produces clean, tested code and refactors. Model=codestral.\",\"qa-tester\":\"Designs and runs tests. Model=mistral.\",\"vision-writer\":\"Handles tasks involving images or multimodal content. Model=gemma3.\",\"context-librarian\":\"Organizes and summarizes project knowledge. Model=phi4.\",\"model-reader-for-large-company-ollama\":\"Accesses the main remote company Ollama host (powerful hardware, no cost or limits). Model=gemma3.\",\"model-reader-for-tiny-private-ollama\":\"Accesses a small local Ollama instance used only for testing functionality not available on the company server. Model=gemma3.\"},\"rules\":[\"When the user requests work, output a DelegationPlan as JSON, mapping each atomic step to one of the defined roles.\",\"Keep steps small, testable, and clearly owned by one role.\",\"Focus first on end-to-end text functionality before adding image or advanced features.\",\"Treat mcp-ollama as a simple working reference, not as a base; use it to compare design choices or verify expected behaviour.\",\"Document findings, plans, and progress incrementally.\"],\"fileWorkflow\":{\"project_plan\":{\"md\":\"Epics, stories, and tasks.\"},\"tasks\":{\"md\":\"Active task board.\"},\"progress\":{\"md\":\"Chronological progress log.\"}},\"principles\":\"Always produce clear, incremental progress and follow clean-code and test-driven principles.\"}}",
+  "mcpServers": {
+    "project-manager": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=gemma3:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "list_models",
+        "describe_model",
+        "chat",
+        "analyze_image"
+      ]
+    },
+    "senior-dev": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=gemma3:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "list_models",
+        "describe_model",
+        "chat",
+        "analyze_image"
+      ]
+    },
+    "agentic-coder": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=codestral:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "chat",
+        "list_models",
+        "describe_model"
+      ]
+    },
+    "code-generator": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=codestral:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "chat",
+        "list_models",
+        "describe_model"
+      ]
+    },
+    "qa-tester": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=mistral:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "analyze_image",
+        "chat",
+        "list_models",
+        "describe_model"
+      ]
+    },
+    "vision-writer": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=gemma3:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "analyze_image",
+        "chat",
+        "list_models",
+        "describe_model"
+      ]
+    },
+    "context-librarian": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=phi4:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "chat",
+        "list_models",
+        "describe_model"
+      ]
+    },
+    "model-reader-for-large-company-ollama": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://10.7.2.100:11434",
+        "-e",
+        "DEFAULT_MODEL=gemma3:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ]
+    },
+    "model-reader-for-tiny-private-ollama": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "OLLAMA_HOST=http://192.168.178.27:11434",
+        "-e",
+        "DEFAULT_MODEL=gemma3:latest",
+        "--network",
+        "host",
+        "stefankuhnakros/mcp-ollama-docker:experimental_mcp-ollama"
+      ],
+      "autoApprove": [
+        "list_models"
+      ]
+    }
+  }
+}
