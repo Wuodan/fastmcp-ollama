@@ -1,0 +1,4 @@
+[submodule "ai_assistance/submodule/mcp-ollama"]
+	path = ai_assistance/submodule/mcp-ollama
+	url = https://github.com/Wuodan/mcp-ollama.git
+	branch = feature/add_default_model
